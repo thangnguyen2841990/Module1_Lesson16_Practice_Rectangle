@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangle</title>
+    <script src="rectangle.js"></script>
+</head>
+<body>
+<canvas id="myCanvas" width="1368" height="768" style="border: solid 1px red"></canvas>
+<script>
+    function getRandomHex() {
+        return Math.floor(Math.random() * 255);
+    }
+
+    function getRandomColor() {
+        let red = getRandomHex();
+        let blue = getRandomHex();
+        let green = getRandomHex();
+        return "rgb(" + red + ',' + green + ',' + blue + ")"
+    }
+
+    function clear() {
+        ctx.clearRect(0, 0, 1368, 768)
+    }
+
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext('2d');
+
+    function drawRectangle() {
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        let height = Math.floor(Math.random() * 400);
+        let width = Math.floor(Math.random() * 400);
+        let color = getRandomColor();
+        let rectangle = new Rectangle(x, y, height, width, color);
+        let perimeter = (rectangle.height + rectangle.width) * 2;
+        let area = (rectangle.height * rectangle.width)
+        alert("perimeter = " + perimeter + "; " + "area = " + area);
+        clear();
+        ctx.beginPath();
+        ctx.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        ctx.fillStyle = rectangle.color;
+        ctx.fill();
+    }
+
+    setInterval(drawRectangle, 2000)
+</script>
+</body>
+</html>
